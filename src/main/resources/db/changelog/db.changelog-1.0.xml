@@ -1,0 +1,57 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="1.0.0" author="kirill.kirillov">
+        <createTable tableName="surveys">
+            <column name="surveys_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="surveys_name" type="varchar">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="surveys_day_start" type="date">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="surveys_day_end" type="date">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="surveys_is_active" type="VARCHAR(8)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="kirill.kirillov">
+        <createTable tableName="questions">
+            <column name="questions_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="questions_text" type="VARCHAR">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="questions_order" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="questions_survey" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="surveys_id" references="surveys(surveys_id)"/>
+            </column>
+
+
+
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
